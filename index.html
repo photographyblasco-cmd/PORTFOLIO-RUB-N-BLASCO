@@ -1,10 +1,11 @@
-# PORTFOLIO-RUB-N-BLASCO<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rubén Blasco | Creador Audiovisual</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* --- ESTILOS GENERALES --- */
         * {
@@ -16,7 +17,7 @@
 
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: #0f0f0f; /* Fondo oscuro elegante */
+            background-color: #0f0f0f;
             color: #f0f0f0;
             line-height: 1.6;
         }
@@ -63,156 +64,4 @@
 
         .section-title {
             font-size: 2rem;
-            font-weight: 300;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            margin-bottom: 50px;
-            text-align: center;
-            color: #ffffff;
-        }
-
-        /* --- INICIO (HERO) --- */
-        #inicio {
-            align-items: center;
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 4rem;
-            font-weight: 600;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-        }
-
-        .subtitle {
-            font-size: 1.2rem;
-            font-weight: 300;
-            color: #888;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-        }
-
-        /* --- GALERÍAS (GRID) --- */
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            width: 100%;
-        }
-
-        .gallery-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 4px;
-            background-color: #1a1a1a;
-            aspect-ratio: 16/10;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-            display: block;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.05);
-        }
-
-        /* Contenedor para videos de YouTube (Responsive) */
-        .video-container {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%; /* Ratio 16:9 */
-            height: 0;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        /* --- FOOTER --- */
-        footer {
-            text-align: center;
-            padding: 40px;
-            font-size: 0.8rem;
-            color: #666;
-            border-top: 1px solid rgba(255,255,255,0.05);
-        }
-    </style>
-</head>
-<body>
-
-    <header>
-        <nav>
-            <a href="#inicio">Inicio</a>
-            <a href="#fotografia">Fotografía</a>
-            <a href="#diseno">Diseño Gráfico</a>
-            <a href="#videografia">Videografía</a>
-        </nav>
-    </header>
-
-    <section id="inicio">
-        <h1>Rubén Blasco</h1>
-        <p class="subtitle">Creador Audiovisual</p>
-    </section>
-
-    <section id="fotografia">
-        <h2 class="section-title">Fotografía</h2>
-        <div class="gallery">
-            <div class="gallery-item">
-                <img src="https://drive.google.com/uc?export=view&id=FILE_ID_FOTO_1" alt="Fotografía 1">
-            </div>
-            <div class="gallery-item">
-                <img src="https://drive.google.com/uc?export=view&id=FILE_ID_FOTO_2" alt="Fotografía 2">
-            </div>
-            <div class="gallery-item">
-                <img src="https://drive.google.com/uc?export=view&id=FILE_ID_FOTO_3" alt="Fotografía 3">
-            </div>
-        </div>
-    </section>
-
-    <section id="diseno">
-        <h2 class="section-title">Diseño Gráfico</h2>
-        <div class="gallery">
-            <div class="gallery-item">
-                <img src="https://drive.google.com/uc?export=view&id=FILE_ID_DISENO_1" alt="Diseño 1">
-            </div>
-            <div class="gallery-item">
-                <img src="https://drive.google.com/uc?export=view&id=FILE_ID_DISENO_2" alt="Diseño 2">
-            </div>
-            <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe>
-            </div>
-        </div>
-    </section>
-
-    <section id="videografia">
-        <h2 class="section-title">Videografía</h2>
-        <div class="gallery">
-            <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/VIDEO_ID_1" allowfullscreen></iframe>
-            </div>
-            <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" allowfullscreen></iframe>
-            </div>
-            <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/VIDEO_ID_3" allowfullscreen></iframe>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2026 Rubén Blasco. Todos los derechos reservados.</p>
-    </footer>
-
-</body>
-</html>
+            font-weight
