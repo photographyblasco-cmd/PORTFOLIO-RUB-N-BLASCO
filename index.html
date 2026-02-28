@@ -93,7 +93,7 @@
             text-transform: uppercase;
         }
 
-        /* --- GALERÍAS (GRID) --- */
+        /* --- GALERÍAS ESTÁNDAR (FOTO Y DISEÑO) --- */
         .gallery {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -101,6 +101,22 @@
             width: 100%;
         }
 
+        /* --- NUEVA GALERÍA ESPECÍFICA PARA VÍDEOS (2x2 GRANDE) --- */
+        .video-gallery {
+            display: grid;
+            grid-template-columns: 1fr; /* En móviles: 1 columna */
+            gap: 30px;
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .video-gallery {
+                 /* En PC/Tablet: EXACTAMENTE 2 COLUMNAS */
+                 grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* --- ITEMS DE LA GALERÍA --- */
         .gallery-item {
             position: relative;
             overflow: hidden;
@@ -129,6 +145,7 @@
             height: 0;
             border-radius: 4px;
             overflow: hidden;
+            background-color: #000;
         }
 
         .video-container iframe {
@@ -147,7 +164,7 @@
 
         .social-links a {
             color: #a0a0a0;
-            font-size: 1.8rem; /* Tamaño del icono */
+            font-size: 1.8rem;
             text-decoration: none;
             transition: color 0.3s ease, transform 0.3s ease;
             display: inline-block;
@@ -155,12 +172,12 @@
 
         .social-links a:hover {
             color: #ffffff;
-            transform: translateY(-3px); /* Pequeño efecto de salto al pasar el ratón */
+            transform: translateY(-3px);
         }
 
         footer {
             text-align: center;
-            padding: 60px 20px 40px; /* Un poco más de espacio arriba para que respire el icono */
+            padding: 60px 20px 40px;
             font-size: 0.8rem;
             color: #666;
             border-top: 1px solid rgba(255,255,255,0.05);
@@ -185,7 +202,7 @@
 
     <section id="videografia">
         <h2 class="section-title">Videografía</h2>
-        <div class="gallery">
+        <div class="video-gallery">
             <div class="video-container">
                 <iframe src="https://www.youtube.com/embed/-98zmOAJI8c" allowfullscreen></iframe>
             </div>
@@ -205,7 +222,7 @@
         <h2 class="section-title">Diseño Gráfico</h2>
         <div class="gallery">
             <div class="gallery-item">
-                <img src="https://drive.google.com/file/d/1rbplr5JBlCoIyA6JESSI5cwK7yVp_bNo/view?usp=sharing" alt="Diseño 1">
+                <img src="https://drive.google.com/uc?export=view&id=1rbplr5JBlCoIyA6JESSI5cwK7yVp_bNo" alt="Diseño 1">
             </div>
             <div class="gallery-item">
                 <img src="https://drive.google.com/uc?export=view&id=FILE_ID_DISENO_2" alt="Diseño 2">
