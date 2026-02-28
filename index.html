@@ -99,6 +99,7 @@
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 30px;
             width: 100%;
+            align-items: start; /* Importante para que no se deformen con alturas distintas */
         }
 
         /* --- NUEVA GALERÍA ESPECÍFICA PARA VÍDEOS (2x2 GRANDE) --- */
@@ -122,19 +123,18 @@
             overflow: hidden;
             border-radius: 4px;
             background-color: #1a1a1a;
-            aspect-ratio: 16/10;
+            cursor: pointer; /* Añade la manita de clic */
         }
 
         .gallery-item img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            height: auto; /* MUESTRA EL FORMATO REAL SIN RECORTAR */
             transition: transform 0.5s ease;
             display: block;
         }
 
         .gallery-item:hover img {
-            transform: scale(1.05);
+            transform: scale(1.03); /* Zoom suavizado */
         }
 
         /* Contenedor para videos de YouTube */
@@ -181,6 +181,48 @@
             font-size: 0.8rem;
             color: #666;
             border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* --- LIGHTBOX (VISOR DE IMÁGENES PANTALLA COMPLETA) --- */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90vh;
+            border-radius: 4px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.8);
+            object-fit: contain;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: 300;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            color: #a0a0a0;
         }
     </style>
 </head>
@@ -246,19 +288,4 @@
                 <img src="https://drive.google.com/uc?export=view&id=FILE_ID_FOTO_2" alt="Fotografía 2">
             </div>
             <div class="gallery-item">
-                <img src="https://drive.google.com/uc?export=view&id=FILE_ID_FOTO_3" alt="Fotografía 3">
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="social-links">
-            <a href="https://www.instagram.com/blascocelf/" target="_blank" rel="noopener noreferrer" title="Sígueme en Instagram">
-                <i class="fab fa-instagram"></i>
-            </a>
-        </div>
-        <p>&copy; 2026 Rubén Blasco. Todos los derechos reservados.</p>
-    </footer>
-
-</body>
-</html>
+                <img src="
