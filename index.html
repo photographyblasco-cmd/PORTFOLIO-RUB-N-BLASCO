@@ -1,13 +1,27 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Portfolio de Rubén Blasco, Creador Audiovisual, especializado en videografía, diseño gráfico y fotografía.">
     <title>Rubén Blasco | Creador Audiovisual</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Mantenemos la fuente Montserrat pero traemos más pesos para mayor versatilidad y elegancia -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* --- ESTILOS GENERALES --- */
+        /* --- VARIABLES & RESET --- */
+        :root {
+            --bg-color: #070707;
+            --surface-color: #121212;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --accent-glow: rgba(255, 255, 255, 0.05);
+            --transition-smooth: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -17,134 +31,296 @@
 
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: #0f0f0f;
-            color: #f0f0f0;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* --- NAVEGACIÓN --- */
+        /* --- NAVEGACIÓN ESTILO GLASSMORPHISM --- */
         header {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(15, 15, 15, 0.9);
-            backdrop-filter: blur(10px);
+            background: rgba(7, 7, 7, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             z-index: 1000;
-            padding: 20px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 24px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            transition: padding 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 15px 0;
+            background: rgba(7, 7, 7, 0.85);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         nav {
             display: flex;
             justify-content: center;
             gap: 40px;
+            flex-wrap: wrap;
         }
 
         nav a {
-            color: #a0a0a0;
+            color: var(--text-secondary);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            font-weight: 500;
             letter-spacing: 2px;
             text-transform: uppercase;
+            position: relative;
+            padding-bottom: 4px;
             transition: color 0.3s ease;
         }
 
-        nav a:hover {
-            color: #ffffff;
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 50%;
+            background-color: var(--text-primary);
+            transition: width 0.3s ease, left 0.3s ease;
         }
 
-        /* --- SECCIONES --- */
+        nav a:hover,
+        nav a.active-link {
+            color: var(--text-primary);
+        }
+
+        nav a:hover::after,
+        nav a.active-link::after {
+            width: 100%;
+            left: 0;
+        }
+
+        /* --- SECCIONES GENERALES --- */
         section {
-            padding: 100px 10%;
+            padding: 120px 8% 80px;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            position: relative;
         }
 
         .section-title {
-            font-size: 2rem;
-            font-weight: 300;
-            letter-spacing: 5px;
+            font-size: 2.2rem;
+            font-weight: 200;
+            letter-spacing: 6px;
             text-transform: uppercase;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
             text-align: center;
-            color: #ffffff;
+            position: relative;
+            align-self: center;
+            display: inline-block;
         }
 
-        /* --- INICIO (HERO) --- */
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 1px;
+            background: var(--text-primary);
+            margin: 15px auto 0;
+            opacity: 0.5;
+            transition: width 0.4s ease;
+        }
+
+        section:hover .section-title::after {
+            width: 80px;
+        }
+
+        /* --- INICIO (HERO) CON ANIMACIONES E ILUMINACIÓN --- */
         #inicio {
             align-items: center;
             text-align: center;
+            overflow: hidden;
+            background: radial-gradient(circle at 50% 50%, #151515 0%, var(--bg-color) 100%);
         }
 
-        h1 {
-            font-size: 4rem;
-            font-weight: 600;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
+        /* Fondo animado sutil que pulsa */
+        #inicio::before {
+            content: '';
+            position: absolute;
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.02) 0%, rgba(0, 0, 0, 0) 60%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 0;
+            animation: pulse-bg 10s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
         }
 
-        .subtitle {
-            font-size: 1.2rem;
-            font-weight: 300;
-            color: #888;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-        }
+        @keyframes pulse-bg {
+            0% {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 0.5;
+            }
 
-        /* --- GALERÍAS ESTÁNDAR (FOTO Y DISEÑO) --- */
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            width: 100%;
-            align-items: start;
-        }
-
-        /* --- NUEVA GALERÍA ESPECÍFICA PARA VÍDEOS (2x2 GRANDE) --- */
-        .video-gallery {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 30px;
-            width: 100%;
-        }
-
-        @media (min-width: 768px) {
-            .video-gallery {
-                 grid-template-columns: repeat(2, 1fr);
+            100% {
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 1;
             }
         }
 
-        /* --- ITEMS DE LA GALERÍA --- */
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Título con gradiente y tipografía fluida */
+        h1 {
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: 600;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            /* Inicia oculto para la animación */
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 0.3s;
+        }
+
+        .subtitle {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            font-weight: 300;
+            color: var(--text-secondary);
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            /* Inicia oculto para la animación */
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 0.6s;
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- CLASES ÚTILES (AÑADIDAS POR JS PARA ANIMACIÓN EN SCROLL) --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1),
+                transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- GALERÍAS (FOTO Y DISEÑO) --- */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            width: 100%;
+        }
+
+        /* --- VIDEO GALERÍA --- */
+        .video-gallery {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 35px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 800px) {
+            .video-gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* --- ITEMS Y HOVERS DE GALERÍAS --- */
         .gallery-item {
             position: relative;
             overflow: hidden;
-            border-radius: 4px;
-            background-color: #1a1a1a;
+            border-radius: 8px;
+            background-color: var(--surface-color);
             cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: var(--transition-smooth);
+            aspect-ratio: 3/2;
+            /* Mantiene proporciones sólidas */
         }
 
         .gallery-item img {
             width: 100%;
-            height: auto;
-            transition: transform 0.5s ease;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
             display: block;
         }
 
-        .gallery-item:hover img {
-            transform: scale(1.03);
+        /* Capa superpuesta en hover para fotos (icono de lupa) */
+        .gallery-item::after {
+            content: '\f002';
+            /* Icono de lupa FontAwesome */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.2) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: #fff;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
         }
 
-        /* Contenedor para videos de YouTube */
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+
+        /* Contenedor videos */
         .video-container {
             position: relative;
             width: 100%;
-            padding-bottom: 56.25%; /* Ratio 16:9 */
+            padding-bottom: 56.25%;
+            /* 16:9 ratio */
             height: 0;
-            border-radius: 4px;
+            border-radius: 12px;
             overflow: hidden;
             background-color: #000;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+            transition: var(--transition-smooth);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .video-container:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            border-color: rgba(255, 255, 255, 0.15);
         }
 
         .video-container iframe {
@@ -156,82 +332,117 @@
             border: none;
         }
 
-        /* --- REDES SOCIALES Y FOOTER --- */
+        /* --- FOOTER Y REDES SOCIALES --- */
+        footer {
+            text-align: center;
+            padding: 80px 20px 40px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            background: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, var(--bg-color) 100%);
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
         .social-links {
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
 
         .social-links a {
-            color: #a0a0a0;
+            color: var(--text-secondary);
             font-size: 1.8rem;
             text-decoration: none;
-            transition: color 0.3s ease, transform 0.3s ease;
-            display: inline-block;
+            transition: var(--transition-smooth);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .social-links a:hover {
-            color: #ffffff;
-            transform: translateY(-3px);
-        }
-
-        footer {
-            text-align: center;
-            padding: 60px 20px 40px;
-            font-size: 0.8rem;
-            color: #666;
-            border-top: 1px solid rgba(255,255,255,0.05);
+            color: var(--text-primary);
+            transform: translateY(-5px) scale(1.1);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
         }
 
         /* --- LIGHTBOX (VISOR DE IMÁGENES PANTALLA COMPLETA) --- */
         .lightbox {
-            display: none;
+            display: flex;
             position: fixed;
             z-index: 2000;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.95);
+            background-color: rgba(0, 0, 0, 0.98);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             justify-content: center;
             align-items: center;
             padding: 20px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
         }
 
         .lightbox.active {
-            display: flex;
+            opacity: 1;
+            pointer-events: auto;
         }
 
         .lightbox img {
-            max-width: 80%; /* Un poco de margen para las flechas */
-            max-height: 90vh;
-            border-radius: 4px;
-            box-shadow: 0 0 30px rgba(0,0,0,0.8);
+            max-width: 90%;
+            max-height: 85vh;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
             object-fit: contain;
-            user-select: none; /* Evita que la imagen se resalte al clicar rápido */
+            user-select: none;
+            /* Animación de entrada de la imagen */
+            transform: scale(0.95);
+            transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
-        /* --- BOTONES DEL LIGHTBOX (CERRAR Y FLECHAS) --- */
-        .lightbox-close, .lightbox-prev, .lightbox-next {
+        .lightbox.active img {
+            transform: scale(1);
+        }
+
+        /* BOTONES DEL LIGHTBOX */
+        .lightbox-close,
+        .lightbox-prev,
+        .lightbox-next {
             position: absolute;
-            color: #fff;
+            color: rgba(255, 255, 255, 0.6);
             font-weight: 300;
             cursor: pointer;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
             user-select: none;
             z-index: 2001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .lightbox-close {
-            top: 20px;
+            top: 30px;
             right: 40px;
-            font-size: 40px;
+            font-size: 45px;
+            width: 50px;
+            height: 50px;
         }
 
-        .lightbox-prev, .lightbox-next {
+        .lightbox-prev,
+        .lightbox-next {
             top: 50%;
             transform: translateY(-50%);
-            font-size: 50px;
-            padding: 20px;
+            font-size: 40px;
+            height: 100px;
+            width: 60px;
+            background: transparent;
+            border-radius: 8px;
         }
 
         .lightbox-prev {
@@ -242,14 +453,22 @@
             right: 20px;
         }
 
-        .lightbox-close:hover, .lightbox-prev:hover, .lightbox-next:hover {
-            color: #a0a0a0;
+        .lightbox-close:hover {
+            color: #fff;
+            transform: rotate(90deg);
+        }
+
+        .lightbox-prev:hover,
+        .lightbox-next:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.1);
         }
     </style>
 </head>
+
 <body>
 
-    <header>
+    <header id="header">
         <nav>
             <a href="#inicio">Inicio</a>
             <a href="#videografia">Videografía</a>
@@ -259,24 +478,29 @@
     </header>
 
     <section id="inicio">
-        <h1>Rubén Blasco</h1>
-        <p class="subtitle">Creador Audiovisual</p>
+        <div class="hero-content">
+            <h1>Rubén Blasco</h1>
+            <p class="subtitle">Creador Audiovisual</p>
+        </div>
     </section>
 
     <section id="videografia">
         <h2 class="section-title">Videografía</h2>
         <div class="video-gallery">
             <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/-98zmOAJI8c" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/-98zmOAJI8c" allowfullscreen
+                    title="Video Project 1"></iframe>
             </div>
             <div class="video-container">
-                <iframe src="https://youtube.com/embed/cmCRlrZjmv0" allowfullscreen></iframe>
+                <iframe src="https://youtube.com/embed/cmCRlrZjmv0" allowfullscreen title="Video Project 2"></iframe>
             </div>
             <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/wFquuwbnBUk" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/wFquuwbnBUk" allowfullscreen
+                    title="Video Project 3"></iframe>
             </div>
             <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/-FsNURbeVgU" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/-FsNURbeVgU" allowfullscreen
+                    title="Video Project 4"></iframe>
             </div>
         </div>
     </section>
@@ -284,17 +508,18 @@
     <section id="diseno">
         <h2 class="section-title">Diseño Gráfico</h2>
         <div class="gallery">
-            <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/_mH6cPoKrxA" allowfullscreen></iframe>
+            <div class="video-container" style="border-radius: 8px;">
+                <iframe src="https://www.youtube.com/embed/_mH6cPoKrxA" allowfullscreen
+                    title="Graphic Design Reel"></iframe>
             </div>
             <div class="gallery-item">
-                <img src="images/concurso-diseno.jpeg" alt="JORNADES DISENY EASD">
+                <img src="images/concurso-diseno.jpeg" loading="lazy" alt="JORNADES DISENY EASD">
             </div>
-             <div class="gallery-item">
-                <img src="images/km0.jpg" alt="JORNADES DISENY EASD">
+            <div class="gallery-item">
+                <img src="images/km0.jpg" loading="lazy" alt="JORNADES DISENY EASD">
             </div>
-             <div class="gallery-item">
-                <img src="images/selected.jpeg" alt="concurso-diseno">
+            <div class="gallery-item">
+                <img src="images/selected.jpeg" loading="lazy" alt="concurso-diseno">
             </div>
         </div>
     </section>
@@ -302,177 +527,156 @@
     <section id="fotografia">
         <h2 class="section-title">Fotografía</h2>
         <div class="gallery">
-            <div class="gallery-item">
-                <img src="assets/768A0305.jpg" alt="comida">
+            <div class="gallery-item"><img src="assets/768A0305.jpg" loading="lazy" alt="comida"></div>
+            <div class="gallery-item"><img src="assets/768A0338.jpg" loading="lazy" alt="comida"></div>
+            <div class="gallery-item"><img src="assets/768A3106.jpg" loading="lazy" alt="comida"></div>
+            <div class="gallery-item"><img src="assets/768A3255.jpg" loading="lazy" alt="comida"></div>
+            <div class="gallery-item"><img src="assets/768A3553.jpg" loading="lazy" alt="comida"></div>
+            <div class="gallery-item"><img src="assets/768A3553.jpg" loading="lazy" alt="comida"></div>
+            <div class="gallery-item"><img src="assets/768A3607.jpg" loading="lazy" alt="comida"></div>
+            <div class="gallery-item"><img src="assets/768A4297.jpg" loading="lazy" alt="comida"></div>
+            <div class="gallery-item"><img src="assets/768A4355.jpg" loading="lazy" alt="comida"></div>
+            <div class="gallery-item"><img src="assets/768A5472.jpg" loading="lazy" alt="comida"></div>
+            <div class="gallery-item"><img src="assets/768A5577.jpg" loading="lazy" alt="comida"></div>
+            <div class="gallery-item"><img src="assets/768A7209.jpg" loading="lazy" alt="comida"></div>
+            <div class="gallery-item"><img src="assets/768A7281.jpg" loading="lazy" alt="comida"></div>
+            <div class="gallery-item"><img src="assets/768A8057.jpg" loading="lazy" alt="comida"></div>
+            <div class="gallery-item"><img src="assets/768A8062.jpg" loading="lazy" alt="comida"></div>
+            <div class="gallery-item"><img src="assets/768A8969.jpg" loading="lazy" alt="comida"></div>
+            <div class="gallery-item"><img src="assets/BODA HELENA & LUCA-17.jpg" loading="lazy" alt="comida"></div>
+            <div class="gallery-item"><img src="assets/BODA HELENA & LUCA-293.jpg" loading="lazy" alt="comida"></div>
+            <div class="gallery-item"><img src="assets/BODA IVAN & LAURA-307.jpg" loading="lazy" alt="comida"></div>
+            <div class="gallery-item"><img src="assets/BODA IVAN & LAURA-502.jpg" loading="lazy" alt="comida"></div>
+            <div class="gallery-item"><img src="assets/BODA IVAN & LAURA-574.jpg" loading="lazy" alt="comida"></div>
+            <div class="gallery-item"><img src="assets/GUILLEM NEBOT-19.jpg" loading="lazy" alt="comida"></div>
+            <div class="gallery-item"><img src="assets/GUILLEM NEBOT-28.jpg" loading="lazy" alt="comida"></div>
+            <div class="gallery-item"><img src="assets/GUILLEM NEBOT-43.jpg" loading="lazy" alt="comida"></div>
+            <div class="gallery-item"><img src="assets/PREBODA - ADRIAN & LAURA-12.jpg" loading="lazy" alt="comida">
             </div>
-            <div class="gallery-item">
-                <img src="assets/768A0338.jpg" alt="comida">
+            <div class="gallery-item"><img src="assets/PREBODA - CARLOS&JESSICA-33.jpg" loading="lazy" alt="comida">
             </div>
-            <div class="gallery-item">
-                <img src="assets/768A3106.jpg" alt="comida">
+            <div class="gallery-item"><img src="assets/PREBODA - CARLOS&JESSICA-39.jpg" loading="lazy" alt="comida">
             </div>
-            <div class="gallery-item">
-                <img src="assets/768A3255.jpg" alt="comida">
-            </div>
-            <div class="gallery-item">
-                <img src="assets/768A3553.jpg" alt="comida">
-            </div>
-            <div class="gallery-item">
-                <img src="assets/768A3553.jpg" alt="comida">
-            </div>
-            <div class="gallery-item">
-                <img src="assets/768A3607.jpg" alt="comida">
-            </div>
-            <div class="gallery-item">
-                <img src="assets/768A4297.jpg" alt="comida">
-            </div>
-            <div class="gallery-item">
-                <img src="assets/768A4355.jpg" alt="comida">
-            </div>
-            <div class="gallery-item">
-                <img src="assets/768A5472.jpg" alt="comida">
-            </div>
-            <div class="gallery-item">
-                <img src="assets/768A5577.jpg" alt="comida">
-            </div>
-            <div class="gallery-item">
-                <img src="assets/768A7209.jpg" alt="comida">
-            </div>
-            <div class="gallery-item">
-                <img src="assets/768A7281.jpg" alt="comida">
-            </div>
-            <div class="gallery-item">
-                <img src="assets/768A8057.jpg" alt="comida">
-            </div>
-            <div class="gallery-item">
-                <img src="assets/768A8062.jpg" alt="comida">
-            </div>
-            <div class="gallery-item">
-                <img src="assets/768A8969.jpg" alt="comida">
-            </div>
-            <div class="gallery-item">
-                <img src="assets/BODA HELENA & LUCA-17.jpg" alt="comida">
-            </div>
-            <div class="gallery-item">
-                <img src="assets/BODA HELENA & LUCA-293.jpg" alt="comida">
-            </div>
-            <div class="gallery-item">
-                <img src="assets/BODA IVAN & LAURA-307.jpg" alt="comida">
-            </div>
-            <div class="gallery-item">
-                <img src="assets/BODA IVAN & LAURA-502.jpg" alt="comida">
-            </div>
-            <div class="gallery-item">
-                <img src="assets/BODA IVAN & LAURA-574.jpg" alt="comida">
-            </div>
-            <div class="gallery-item">
-                <img src="assets/GUILLEM NEBOT-19.jpg" alt="comida">
-            </div>
-            <div class="gallery-item">
-                <img src="assets/GUILLEM NEBOT-28.jpg" alt="comida">
-            </div>
-             <div class="gallery-item">
-                <img src="assets/GUILLEM NEBOT-43.jpg" alt="comida">
-            </div>
-             <div class="gallery-item">
-                <img src="assets/PREBODA - ADRIAN & LAURA-12.jpg" alt="comida">
-            </div>
-             <div class="gallery-item">
-                <img src="assets/PREBODA - CARLOS&JESSICA-33.jpg" alt="comida">
-            </div>
-             <div class="gallery-item">
-                <img src="assets/PREBODA - CARLOS&JESSICA-39.jpg" alt="comida">
-            </div>
-             <div class="gallery-item">
-                <img src="assets/PREBODA - CARLOS&JESSICA-42.jpg" alt="comida">
+            <div class="gallery-item"><img src="assets/PREBODA - CARLOS&JESSICA-42.jpg" loading="lazy" alt="comida">
             </div>
         </div>
     </section>
 
     <footer>
         <div class="social-links">
-            <a href="https://www.instagram.com/blascocelf/" target="_blank" rel="noopener noreferrer" title="Sígueme en Instagram">
+            <a href="https://www.instagram.com/blascocelf/" target="_blank" rel="noopener noreferrer"
+                title="Sígueme en Instagram">
                 <i class="fab fa-instagram"></i>
             </a>
         </div>
         <p>&copy; 2026 Rubén Blasco. Todos los derechos reservados.</p>
     </footer>
 
+    <!-- Contenedor del Visor Lightbox -->
     <div class="lightbox" id="lightbox">
         <span class="lightbox-close" id="lightbox-close">&times;</span>
-        <span class="lightbox-prev" id="lightbox-prev">&#10094;</span> <span class="lightbox-next" id="lightbox-next">&#10095;</span> <img id="lightbox-img" src="" alt="Imagen a pantalla completa">
+        <span class="lightbox-prev" id="lightbox-prev">&#10094;</span>
+        <span class="lightbox-next" id="lightbox-next">&#10095;</span>
+        <img id="lightbox-img" src="" alt="Imagen a pantalla completa">
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+
+            /* --- 1. GLASSMORPHISM HEADER (Efecto scroll en menú) --- */
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            /* --- 2. INTERSECTION OBSERVER (Animaciones al hacer scroll) --- */
+            const revealElements = document.querySelectorAll('.section-title, .gallery-item, .video-container');
+
+            // Asignar clase de revelado y un tiempo de espera progresivo para efecto en cascada
+            revealElements.forEach((el, index) => {
+                el.classList.add('reveal');
+                // Efecto cascada basado en el orden natural en el DOM para cada bloque
+                el.style.transitionDelay = `${(index % 4) * 0.15}s`;
+            });
+
+            const observerOptions = {
+                threshold: 0.15, // Porcentaje del elemento que debe estar visible para lanzar la animación
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target); // Dejamos de observarlo una vez que ha aparecido
+                    }
+                });
+            }, observerOptions);
+
+            revealElements.forEach(el => observer.observe(el));
+
+
+            /* --- 3. LOGICA DEL LIGHTBOX (VISOR) --- */
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
             const closeBtn = document.getElementById('lightbox-close');
             const prevBtn = document.getElementById('lightbox-prev');
             const nextBtn = document.getElementById('lightbox-next');
-            
-            // Convertimos la lista de imágenes en un Array (lista ordenada)
-            const images = Array.from(document.querySelectorAll('.gallery-item img'));
-            let currentIndex = 0; // Guardará el número de la foto que estamos viendo
 
-            // Función para mostrar la foto según su número (índice)
+            const images = Array.from(document.querySelectorAll('.gallery-item img'));
+            let currentIndex = 0;
+
             function showImage(index) {
-                // Si retrocedemos desde la primera, vamos a la última
                 if (index < 0) {
                     currentIndex = images.length - 1;
-                } 
-                // Si avanzamos desde la última, vamos a la primera
-                else if (index >= images.length) {
+                } else if (index >= images.length) {
                     currentIndex = 0;
-                } 
-                // En condiciones normales
-                else {
+                } else {
                     currentIndex = index;
                 }
                 lightboxImg.src = images[currentIndex].src;
             }
 
-            // Al hacer clic en una imagen de la web
             images.forEach((img, index) => {
                 img.addEventListener('click', () => {
-                    currentIndex = index; // Guardamos qué foto hemos pulsado
+                    currentIndex = index;
                     lightboxImg.src = img.src;
-                    lightbox.classList.add('active'); // Muestra el visor
+                    lightbox.classList.add('active');
+                    document.body.style.overflow = 'hidden'; // Evitar scroll del fondo
                 });
             });
 
-            // Botón Flecha Izquierda
             prevBtn.addEventListener('click', (e) => {
-                e.stopPropagation(); // Evita que el clic cierre el visor
+                e.stopPropagation();
                 showImage(currentIndex - 1);
             });
 
-            // Botón Flecha Derecha
             nextBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 showImage(currentIndex + 1);
             });
 
-            // Cerrar al pulsar la X
             closeBtn.addEventListener('click', () => {
                 lightbox.classList.remove('active');
+                document.body.style.overflow = 'auto'; // Restaurar scroll
             });
 
-            // Cerrar al hacer clic en el fondo negro
             lightbox.addEventListener('click', (e) => {
-                // Solo cerramos si el clic ha sido en el fondo, no en la foto ni en las flechas
-                if (e.target === lightbox || e.target === lightboxImg) {
+                if (e.target === lightbox) {
                     lightbox.classList.remove('active');
+                    document.body.style.overflow = 'auto';
                 }
             });
 
-            // Navegación con el teclado
             document.addEventListener('keydown', (e) => {
-                // Si el visor no está abierto, ignoramos el teclado
                 if (!lightbox.classList.contains('active')) return;
-                
                 if (e.key === 'Escape') {
                     lightbox.classList.remove('active');
+                    document.body.style.overflow = 'auto';
                 } else if (e.key === 'ArrowLeft') {
                     showImage(currentIndex - 1);
                 } else if (e.key === 'ArrowRight') {
@@ -481,6 +685,6 @@
             });
         });
     </script>
-
 </body>
+
 </html>
